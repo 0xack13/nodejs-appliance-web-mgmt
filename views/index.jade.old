@@ -1,0 +1,9 @@
+extends layout
+
+block content
+  h1= 'ddd'
+  p Welcome to
+  #info= flash.info
+
+  - if (message)
+   p= message

@@ -1,0 +1,22 @@
+doctype 5
+head
+		title= 'Silent Daemon v0.1'
+		link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
+		link(rel='stylesheet', href='/stylesheets/bootstrap-responsive.css') 
+		link(rel='stylesheet', href='/stylesheets/docs.css')
+		script(src='http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js')
+		script(src='/socket.io/socket.io.js')
+		script
+			$(document).ready(function() {
+				var socket = io.connect('http://localhost:3000');
+				socket.on('log', function (data) {
+					$('#log').append('<br />' + data);
+					console.log(data);
+				})
+			});
+		h1 SilentDaemon Busybox v0.1
+		p.lead Tiny and highly-scalable load-blanacer!
+		.page-header		
+		
+body
+		#log Resultado do tail

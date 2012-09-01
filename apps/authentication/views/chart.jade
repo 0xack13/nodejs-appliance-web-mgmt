@@ -1,0 +1,126 @@
+doctype 5
+head
+		title= 'Silent Daemon v0.1'
+body
+	.navbar.navbar-fixed-top
+		.navbar-inner
+			.container
+				a.brand(href='../') SilentDaemon Busybox v0.1
+					#main-menu.nav-collapse
+	.container-fluid
+			.row-fluid
+				.span3
+					.well.sidebar-nav
+						ul.nav.nav-list
+							li.nav-header Basic Tools
+							li.active
+								a(href='#') Ping
+							li
+								a(href='#') Traceroute
+							li
+								a(href='#') netstat
+							li.nav-header Backend
+							li
+								a(href='#') HAProxy
+							li
+								a(href='#') System Configuration
+							li
+								a(href='#') Backup & Restore
+							li
+								a(href='#') About
+							li
+								a(href='#') Get connected!
+				.span8
+					form(action='/ping', method='post', autocomplete='off', class="well form-search")
+						.fieldset
+						.control-label
+						p Please enter required the URL or IP Address: 
+						input(type='text', name='ip', class='input-xlarge')
+						input(type='submit', name='Submit', class='btn btn-primary')
+						p.help-block Please make sure that the device is connected in order to reach your desitnation
+						#placeholder(style='width: 600px; height: 300px;')
+						#placeholder2(style='width: 600px; height: 300px;')
+						hr
+						- if (typeof(msg) != 'undefined')
+								.alert.alert-error
+									a.close ×
+									strong Error | #{msg}
+						.control-group.warning
+							label.control-label(for='inputWarning')
+								#log
+					link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
+					link(rel='stylesheet', href='/stylesheets/docs.css')
+					script(src='http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js')
+					script(src='/javascripts/jquery.flot.js')
+					script(src='/socket.io/socket.io.js')
+					script
+						$(document).ready(function() {
+							var socket = io.connect('http://localhost:3000', { 'connect timeout': 50000 });
+							socket.on('log', function (data) {
+									$('#log').append('<br /> Result: ' + data);
+							})
+							socket.on('connect_failed', function(){
+								console.log('Connection Failed');
+							});
+							socket.on('connect', function(){
+								console.log('Connected');
+							});
+							socket.on('disconnect', function () {
+								console.log('Disconnected');
+							});
+							$(function () {
+								var d1 = [];
+								for (var i = 0; i < 14; i += 0.5)
+									d1.push([i, Math.sin(i)]);
+								var d2 = [[0, 3], [4, 8], [8, 5], [9, 13]];
+								var d3 = [[0, 12], [7, 12], null, [7, 2.5], [12, 2.5]];
+								$.plot($("#placeholder"), [ d1, d2, d3 ]);
+							});
+							$(function () {
+								alert("#{latitude}");
+								var data = [], totalPoints = 300;
+								function getRandomData() {
+									if (data.length > 0)
+										data = data.slice(1);
+									while (data.length < totalPoints) {
+										var prev = data.length > 0 ? data[data.length - 1] : 50;
+										var y = prev + Math.random() * 10 - 5;
+										if (y < 0)
+											y = 0;
+										if (y > 100)
+											y = 100;
+										data.push(y);
+									}
+									var res = [];
+									for (var i = 0; i < data.length; ++i)
+										res.push([i, data[i]])
+									return res;
+								}
+								var updateInterval = 30;
+								$("#updateInterval").val(updateInterval).change(function () {
+									var v = $(this).val();
+									if (v && !isNaN(+v)) {
+										updateInterval = +v;
+										if (updateInterval < 1)
+											updateInterval = 1;
+										if (updateInterval > 2000)
+											updateInterval = 2000;
+										$(this).val("" + updateInterval);
+									}
+								});
+								var options = {
+									series: { shadowSize: 0 }, // drawing is faster without shadows
+									yaxis: { min: 0, max: 100 },
+									xaxis: { show: false }
+								};
+								var plot = $.plot($("#placeholder2"), [ getRandomData() ], options);
+								function update() {
+									plot.setData([ getRandomData() ]);
+									// since the axes don't change, we don't need to call plot.setupGrid()
+									plot.draw();
+
+									setTimeout(update, updateInterval);
+								}
+								update();
+							});
+						});

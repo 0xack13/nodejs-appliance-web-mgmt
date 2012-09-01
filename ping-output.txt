@@ -1,0 +1,17 @@
+PING google.com (173.194.35.104): 56 data bytes
+64 bytes from 173.194.35.104: icmp_seq=0 ttl=53 time=148.683 ms
+64 bytes from 173.194.35.104: icmp_seq=1 ttl=50 time=143.466 ms
+64 bytes from 173.194.35.104: icmp_seq=2 ttl=50 time=146.342 ms
+64 bytes from 173.194.35.104: icmp_seq=3 ttl=50 time=141.800 ms
+64 bytes from 173.194.35.104: icmp_seq=4 ttl=53 time=134.412 ms
+64 bytes from 173.194.35.104: icmp_seq=5 ttl=53 time=140.934 ms
+64 bytes from 173.194.35.104: icmp_seq=6 ttl=53 time=143.368 ms
+64 bytes from 173.194.35.104: icmp_seq=7 ttl=50 time=138.846 ms
+64 bytes from 173.194.35.104: icmp_seq=8 ttl=50 time=141.769 ms
+64 bytes from 173.194.35.104: icmp_seq=9 ttl=50 time=140.166 ms
+64 bytes from 173.194.35.104: icmp_seq=10 ttl=50 time=145.316 ms
+64 bytes from 173.194.35.104: icmp_seq=11 ttl=53 time=139.781 ms
+64 bytes from 173.194.35.104: icmp_seq=12 ttl=50 time=141.102 ms
+64 bytes from 173.194.35.104: icmp_seq=13 ttl=53 time=143.345 ms
+64 bytes from 173.194.35.104: icmp_seq=14 ttl=50 time=155.051 ms
+64 bytes from 173.194.35.104: icmp_seq=15 ttl=53 time=141.457 ms

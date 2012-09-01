@@ -1,0 +1,28 @@
+extends layout
+
+block content
+	.control-group
+
+	- if (typeof(info) != 'undefined') {
+		.alert.alert-success
+			a.close ×
+			strong Success | #{info}
+
+	- } else if (typeof(error) != 'undefined') {
+		.alert.alert-error
+			a.close ×
+			strong Error | #{error}
+	- }
+
+	p Please enter your username and password in the following fields
+	
+	.controls
+	form(action='/sessions', method='post')
+		.fieldset
+		.control-label
+			h3 Username: 
+				input(type='text', name='user', class='input-xlarge')
+		.control-label
+			h3 Password: 
+				input(type='password', name='password', class='input-xlarge')
+		input(type='submit', name='Submit', class='btn')
